@@ -20,10 +20,10 @@ class CreateAppoinmentService {
         const findAppointmentSameDate = this.appointmentsRepository.findByDate(dateAppointment)
     
         if(findAppointmentSameDate) {
-            throw Error("Agendamento com horário marcado!")
+            throw Error("Agendamento com horário marcado!") 
         } 
     
-        const appointment = this.appointmentsRepository.create(provider, dateAppointment);
+        const appointment = this.appointmentsRepository.create({provider, date: dateAppointment});
         return appointment
     }
 }
