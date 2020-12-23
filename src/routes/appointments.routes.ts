@@ -1,9 +1,8 @@
 import { Router } from 'express';
-import { v4 as uuid } from 'uuid';
 import { startOfHour, parseISO, isEqual } from 'date-fns';
-import Appointment from '../model/Appointment';
+import Appointment from '../models/Appointment';
 import AppointmentsRepository from '../repositories/AppointmentRepository'
-import CreateAppointmentService from '../services/CreateAppoinrmentService';
+import CreateAppointmentService from '../services/CreateAppointmentService';
 import { getCustomRepository } from 'typeorm';
 
 const appointmentsRouter = Router();
