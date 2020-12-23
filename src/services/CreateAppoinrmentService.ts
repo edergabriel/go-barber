@@ -1,4 +1,5 @@
 import { startOfHour } from 'date-fns';
+import { getCustomRepository } from 'typeorm';
 import Appointment from '../model/Appointment';
 import AppointmentsRepository from '../repositories/AppointmentRepository';
 
@@ -7,25 +8,27 @@ interface Request {
     date: Date;
 }
 
-class CreateAppoinmentService {
-    private appointmentsRepository: AppointmentsRepository;
+class CreateAppointmentService {
+    public async execute({ date, provider }: Request): Promise<Appointment> {
+        const appointmentsRepository = getCustomRepository(AppointmentsRepository);
 
-    constructor(appointmentsRepository: AppointmentsRepository) {
-        this.appointmentsRepository = appointmentsRepository
-    }
-
-    public execute({ date, provider }: Request): Appointment {
         const dateAppointment = startOfHour(date);
 
-        const findAppointmentSameDate = this.appointmentsRepository.findByDate(dateAppointment)
+        const findAppointmentSameDate = await appointmentsRepository.findByDate(dateAppointment)
     
         if(findAppointmentSameDate) {
             throw Error("Agendamento com horário marcado!") 
         } 
+
+        const appointment = appointmentsRepository.create({
+            provider,
+            date: dateAppointment
+        })
+
+        await appointmentsRepository.save(appointment);
     
-        const appointment = this.appointmentsRepository.create({provider, date: dateAppointment});
         return appointment
     }
 }
 
-export default CreateAppoinmentService;
+export default CreateAppointmentService;
