@@ -1,16 +1,15 @@
 import { Router } from 'express';
 import { startOfHour, parseISO, isEqual } from 'date-fns';
-import Appointment from '../models/Appointment';
 import AppointmentsRepository from '../repositories/AppointmentRepository'
 import CreateAppointmentService from '../services/CreateAppointmentService';
 import { getCustomRepository } from 'typeorm';
 
 const appointmentsRouter = Router();
 
-appointmentsRouter.get('/', (request, response) => {
+appointmentsRouter.get('/', async (request, response) => {
   const appointmentsRepository = getCustomRepository(AppointmentsRepository);
  
-  const appointments = appointmentsRepository.find()
+  const appointments = await appointmentsRepository.find()
 
   return response.status(200).json(appointments)
 })
