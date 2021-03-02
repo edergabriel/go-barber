@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { startOfHour, parseISO, isEqual } from 'date-fns';
-import AppointmentsRepository from '../../modules/appointments/repositories/AppointmentRepository'
-import CreateAppointmentService from '../../modules/appointments/services/CreateAppointmentService';
+import AppointmentsRepository from '../../../../modules/appointments/repositories/AppointmentRepository'
+import CreateAppointmentService from '../../../../modules/appointments/services/CreateAppointmentService';
 import { getCustomRepository } from 'typeorm';
 import  ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
