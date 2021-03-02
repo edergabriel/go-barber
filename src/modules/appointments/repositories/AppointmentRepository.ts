@@ -1,5 +1,5 @@
 import { isEqual } from 'date-fns';
-import Appointment from '../models/Appointment';
+import Appointment from '../entities/Appointment';
 import { EntityRepository, Repository } from 'typeorm';
 
 @EntityRepository(Appointment)
@@ -11,7 +11,7 @@ class AppointmentRepository extends Repository<Appointment>{
         })
 
         return findAppointment || null;
-    } 
+    }
 }
 
 export default AppointmentRepository;
