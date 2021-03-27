@@ -10,6 +10,7 @@ import routes from './routes';
 import '../database';
 import uploadConfig from '../../../config/upload';
 import AppError from '../../errors/AppError';
+import '@shared/container';
 
 const app = express();
 
